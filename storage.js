@@ -7,13 +7,13 @@ class Storage{
 
         const dataString = JSON.stringify(data);
         
-        localStorage.setItem('beverage', dataString);
+        localStorage.setItem('beverages', dataString);
 
     }
 
     loadData(){
 
-        const dataString = localStorage.getItem('beverage')
+        const dataString = localStorage.getItem('beverages')
 
         if (dataString) {
             const data = JSON.parse(dataString);

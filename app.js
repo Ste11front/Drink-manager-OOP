@@ -1,3 +1,3 @@
-const gui = new GUI();
+const ui = new UI();
 
-gui.start();
+ui.startApp();

@@ -1,4 +1,4 @@
-class GUI {
+class UI { //gui
 
     constructor() {
 
@@ -11,7 +11,7 @@ class GUI {
         
     }
 
-    start() {
+    startApp() {
         while (true) {
 
             const firstChoice = prompt(
@@ -24,11 +24,11 @@ class GUI {
             );
 
             if (firstChoice === "1") {
-                this.showBooks();
+                this.showBeverages();
             } else if (firstChoice === "2") {
-                this.insertBook();
+                this.insertBeverage();
             } else if (firstChoice === "3") {
-                this.deleteBook();
+                this.deleteBeverage();
             } else if (firstChoice === "4") {
                 break;
             } else {
@@ -38,7 +38,7 @@ class GUI {
     }
 
 
-    insertBook(){
+    insertBeverage(){
 
         const name = prompt('Inserisci il nome');
         const maker = prompt('Inserisci il produttore');
@@ -46,23 +46,23 @@ class GUI {
         const vol = prompt('Inserisci il grado alcolico');
         const type = prompt('Inserisci il tipo');
 
-        const book = new Book(name, maker, dop, vol, type);
+        const beverage = new Beverage(name, maker, dop, vol, type);
 
-        this.cellar.addBeverage(book);
+        this.cellar.addBeverage(beverage);
 
         this.storage.saveData(this.cellar.beverage);
     }
 
 
-    showBooks(){
+    showBeverages(){
 
-        const allBooks = this.cellar.getAllBookCards();
+        const allBeverages = this.cellar.getAllBeverageCards();
 
-        alert(allBooks);
+        alert(allBeverages);
 
     }
 
-    deleteBook(){
+    deleteBeverage(){
 
         const humanIndex = prompt('Inserisci il numero della bevanda da eliminare');
         const index = humanIndex - 1;

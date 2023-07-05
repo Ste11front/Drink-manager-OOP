@@ -1,22 +1,22 @@
 class Cellar{ //library
 
 
-    constructor(beverage = []){
+    constructor(beverages = []){
 
-        this.beverage = beverage;
+        this.beverages = beverages;
 
     }
 
     addBeverage(bev) {
-        this.beverage.push(bev)
+        this.beverages.push(bev)
     }
 
     deleteBeverage(index){
 
-        this.beverage.splice(index, 1);
+        this.beverages.splice(index, 1);
     }
 
-    getAllBookCards(){
+    getAllBeverageCards(){
         
         let allCards = '';
 
@@ -33,8 +33,8 @@ class Cellar{ //library
     fromDbObjects(data){
 
         for (const genericObject of data) {
-            const book = new Book(genericObject.title, genericObject.author, genericObject.dop, genericObject.publisher);
-            this.publications.push(book);
+            const beverage = new Beverage(genericObject.name, genericObject.marker, genericObject.dop, genericObject.vol, genericObject.type);
+            this.beverages.push(beverage);
         }
 
     }
