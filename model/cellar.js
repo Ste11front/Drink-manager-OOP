@@ -1,42 +1,27 @@
-class Cellar{ //library
-
-
-    constructor(beverages = []){
-
-        this.beverages = beverages;
-
+class Cellar {
+    constructor(){
+        this.beverageArray=[];
     }
 
-    addBeverage(bev) {
-        this.beverages.push(bev)
-    }
-
-    deleteBeverage(index){
-
-        this.beverages.splice(index, 1);
-    }
-
-    getAllBeverageCards(){
+    getAllBeverages() {
+        let allBeveragesString = '';
         
-        let allCards = '';
-
-        for (let i = 0; i < this.publications.length; i++) {
-            const pub = this.publications[i]
-            const humanIndex = i + 1;
-            allCards += humanIndex + ') ' + pub.toString()
-            allCards += '------------------------\n'
+        for (let i = 0; i < this.beverageArray.length; i++) {
+            const element = this.beverageArray[i];
+            const humanIndex = i+1;
+            allBeveragesString += humanIndex + ') ' + element.toString();
+            allBeveragesString += '-----------------------\n';
         }
-
-        return allCards;
+        return allBeveragesString;
     }
 
-    fromDbObjects(data){
-
-        for (const genericObject of data) {
-            const beverage = new Beverage(genericObject.name, genericObject.marker, genericObject.dop, genericObject.vol, genericObject.type);
-            this.beverages.push(beverage);
-        }
+    addBeverage(beverage) {
+        this.beverageArray.push(beverage);
 
     }
 
+    removeBeverage(i) {
+        this.beverageArray.splice(i, 1);
+
+    }
 }

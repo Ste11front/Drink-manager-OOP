@@ -1,17 +1,17 @@
-class UI { //gui
+class UI{
+    constructor(){
 
-    constructor() {
-
-        this.storage = new Storage();
-        this.cellar = new Cellar()
-        const data = this.storage.loadData();
-        if (data !== null) {
-            this.cellar.fromDbObjects(data);
+        const data = Storage.loadData();
+        if (data != null) {
+            
+        } else {
+            this
         }
-        
+
+        this.cellar = new Cellar();
     }
 
-    startApp() {
+    startApp(){
         while (true) {
 
             const firstChoice = prompt(
@@ -37,41 +37,46 @@ class UI { //gui
         }
     }
 
+    showBeverages(){
+        const allBeverages = this.cellar.getAllBeverages();
+        alert(allBeverages);
+    }
 
     insertBeverage(){
 
+        const insertChoice = prompt('Vuoi inserire una birra o un vino');
+
+        if (insertChoice !== 'birra' && insertChoice !== 'vino') {
+            alert('non puoi inserire altri tipi di bevande');
+            return;
+        }
+
         const name = prompt('Inserisci il nome');
         const maker = prompt('Inserisci il produttore');
-        const dop = prompt('Inserisci la data di produzione nel formato gg/mm/aaaa');
-        const vol = prompt('Inserisci il grado alcolico');
+        const vol = parseInt(prompt('Inserisci gradazione alcolica'));
         const type = prompt('Inserisci il tipo');
 
-        const beverage = new Beverage(name, maker, dop, vol, type);
+        if (insertChoice === 'birra') {
+            const malt = prompt('Inserisci il tipo di malto');
+            const beer = new Beer(name, maker, vol, type, malt);
+            this.cellar.addBeverage(beer);
+        } else {
+            const region = prompt('Inserisci la regione');
+            const vine = prompt('Inserisci il vitigno');
+            const wine = new Wine(name, maker, vol, type, region, vine);
+            this.cellar.addBeverage(wine);
+        
+        }
+        Storage.saveData(this.cellar.beverageArray);
 
-        this.cellar.addBeverage(beverage);
-
-        this.storage.saveData(this.cellar.beverage);
     }
-
-
-    showBeverages(){
-
-        const allBeverages = this.cellar.getAllBeverageCards();
-
-        alert(allBeverages);
-
-    }
-
+    
     deleteBeverage(){
+        const humanIndex = prompt('Inserisci il numero della bevanda da rimuovere');
+        const i = humanIndex -1;
 
-        const humanIndex = prompt('Inserisci il numero della bevanda da eliminare');
-        const index = humanIndex - 1;
-        this.cellar.deleteBeverage(index);
-
-        this.storage.saveData(this.cellar.beverage);
-
+        this.cellar.removeBeverage(i);
+       
+        Storage.saveData(this.cellar.beverageArray);
     }
-
-
-
 }
